@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:paddingTop="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <ImageView
+        android:id="@+id/pacer_image"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_pacer_launcher" />
+
+    <LinearLayout
+        android:id="@+id/starting_level_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pacer_image"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Starting Level"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+
+            <EditText
+                android:id="@+id/starting_level_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="2"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:maxLength="2"
+                android:text="1"
+                android:textColor="@android:color/white"
+                android:selectAllOnFocus="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/max_level_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/starting_level_view"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Max Level"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/max_level_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="2"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:maxLength="2"
+            android:text="25"
+            android:textColor="@android:color/white"
+            android:selectAllOnFocus="true"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/max_level_view"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:text="Endless Mode"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+        <CheckBox
+            android:id="@+id/endless_mode_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/begin_workout_button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Begin"
+        android:textSize="20sp"/>
+</RelativeLayout>

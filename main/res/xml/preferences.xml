@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="volume_switch"
+        android:summary="@string/volume_summary"
+        android:title="@string/volume" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="vibration_switch"
+        android:summary="@string/vibration_summary"
+        android:title="@string/vibration" />
+</PreferenceScreen>

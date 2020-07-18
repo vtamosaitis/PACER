@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PACER</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="multiplier">Multiplier</string>
+    <string name="settings">Settings</string>
+    <string name="volume">Volume</string>
+    <string name="volume_summary">Turn volume for cues on or off</string>
+    <string name="vibration">Vibration</string>
+    <string name="vibration_summary">Turn vibration for cues on or off</string>
+</resources>
