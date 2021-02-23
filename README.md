@@ -1,5 +1,5 @@
 # PACER
-Android Application that paces the user's shuttle runs and progressively gets more difficult.
+Android Application that paces the user's shuttle runs and progressively increases the pace.
 
 ## About
 PACER is an Android App built using Android Studio which helps the user design shuttle runs similar to the PACER Multi-Stage Fitness test. The logic, by default, follows the PACER Multi-Stage Fitness test exactly, but the user can customize the workout to fit their needs: the user can change the starting level, ending level, and if the workout should be endless. The motivation to create this app was to provide users with a simple app to keep their pace during shuttle runs.
