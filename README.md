@@ -14,4 +14,4 @@ Opening the app will show a simple screen which allows the user to designate at 
 \
 \
 ![Screenshot](screenshots/Timer.png) ![Screenshot](screenshots/TimerInProgress.png)
-###### The left is the view after pressing Begin Workout button on the Main Screen. The right is the view of the timer while a workout is in progress. Current Level is displayed on the top right.
+###### The left is the view after pressing the 'Begin' button on the Main Screen. The right is the view of the timer while a workout is in progress. Current Level is displayed on the top right.
