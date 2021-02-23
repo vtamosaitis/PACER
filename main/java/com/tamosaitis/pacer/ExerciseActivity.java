@@ -27,7 +27,7 @@ public class ExerciseActivity extends AppCompatActivity {
      * currentRunTime:  total duration of current run
      * startTime:       the moment the timer starts or resumes
      * sumPastRuns:     total duration of all runs excluding current run
-     * correctedTime:   total duration of all runs (MillisecondTime + Time Buff
+     * correctedTime:   total duration of all runs (MillisecondTime + Time Buff)
      * currentLevel:    current level of workout; resets to startingLevel
      * hasStarted:      tracks if a workout is in progress (including paused workouts)
      *                      used to override onBackPressed to prevent unwanted back button
@@ -37,10 +37,11 @@ public class ExerciseActivity extends AppCompatActivity {
      *
      * Above values are reset on reset button click
      * ---------------------------------------------------------------------------------------------
+     *
      * shuttleDuration: the duration of shuttles on current level
      * milliRemaining:  milliseconds remaining until current shuttle ends
      * startingLevel:   level that the workout will start at (passed from MainActivity)
-     * maxLevel:     level that the workout will stop incrementing at; the workout will end at
+     * maxLevel:        level that the workout will stop incrementing at; the workout will end at
      *                      this level is isEndless is false (passed from MainActivity)
      * isEndless:       workout will continue until stopped by user if this is true, else
      *                      it will end at endingLevel (passed from Main Activity)
@@ -54,7 +55,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private long currentRunTime, startTime, sumPastRuns, correctedTime = 0L;
     private long shuttleDuration, milliRemaining;
     private int minutes, seconds, milliseconds, shuttlesRemaining;
-    private double speedMultiplier = 1;
+    private double speedMultiplier = 1; // Intended to be a user setting -- Not yet implemented
     private boolean hasStarted = false;
     private boolean endWorkout = false;
     private float volume = 1.0f;
@@ -113,6 +114,8 @@ public class ExerciseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 milliRemaining = shuttleDuration;
                 runCountdown();
+                
+                // start workout after countdown
                 startTime = SystemClock.uptimeMillis() + COUNTDOWN_AUDIO_DELAY;
                 handler.postDelayed(runnable, COUNTDOWN_AUDIO_DELAY);
 
@@ -164,20 +167,19 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         });
 
+        // Workout Thread
         runnable = new Runnable() {
 
             public void run() {
-
                 currentRunTime = SystemClock.uptimeMillis() - startTime;
-
+                
+                // Convert system time to be readable for the clock
+                // Note that the clock uses correctedTime, which
+                // is the total time of the entire workout:
                 correctedTime = sumPastRuns + currentRunTime;
-
                 seconds = (int) (correctedTime / 1000);
-
                 minutes = seconds / 60;
-
                 seconds = seconds % 60;
-
                 milliseconds = (int) (correctedTime % 1000);
 
                 if (milliRemaining - currentRunTime <= 0) {
@@ -228,11 +230,14 @@ public class ExerciseActivity extends AppCompatActivity {
         milliRemaining = currentRunTime + shuttleDuration;
     }
 
+    // Logic to determine the shuttle duration and number of shuttles for a give level.
     private void levelLogic(int level) {
         shuttleDuration = Math.round(72000 / (speedMultiplier * ((level - 1) * 0.5 + 8.5)));
         shuttlesRemaining = (int) (66000 / shuttleDuration);
     }
 
+    // Plays audio/vibration cues when the user starts a new run or resumes a run from pause.
+    // Plays audio/vibration depending on the user settings.
     private void runCountdown() {
         final long[] pattern = {0L, 200L, 800L, 200L, 800L, 200L, 800L, 400L};
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("vibration_switch", false)) {
@@ -242,17 +247,9 @@ public class ExerciseActivity extends AppCompatActivity {
             cues.play(countdownCue, volume, volume, 0, 0, 1);
         }
     }
-
-    private void nextShuttle() {
-        final long[] pattern = {0L, 200L};
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("vibration_switch", false)) {
-            v.vibrate(pattern, -1);
-        }
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("volume_switch", false)) {
-            cues.play(shuttleCue, volume, volume, 0, 0, 1);
-        }
-    }
-
+    
+    // Plays audio/vibration cues to signal a new level.
+    // Plays audio/vibration depending on the user settings.
     private void nextLevel() {
         final long[] pattern = {0L, 200L, 100L, 200L};
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("vibration_switch", false)) {
@@ -260,6 +257,18 @@ public class ExerciseActivity extends AppCompatActivity {
         }
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("volume_switch", false)) {
             cues.play(levelCue, volume, volume, 0, 0, 1);
+        }
+    }
+
+    // Plays audio/vibration cues to signal a new shuttle.
+    // Plays audio/vibration depending on the user settings.
+    private void nextShuttle() {
+        final long[] pattern = {0L, 200L};
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("vibration_switch", false)) {
+            v.vibrate(pattern, -1);
+        }
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("volume_switch", false)) {
+            cues.play(shuttleCue, volume, volume, 0, 0, 1);
         }
     }
 
